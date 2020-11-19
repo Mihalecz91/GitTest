@@ -1,12 +1,14 @@
 package subjects;
 
+import java.util.List;
+
 public class Person {
 
 	private String idNumber;
 	private String name;
 	private String email;
 	private String telephoneNumber;
-	private Pet pets;
+	private List<Pet> pets;
 
 	public String getIdNumber() {
 		return idNumber;
@@ -40,11 +42,11 @@ public class Person {
 		this.telephoneNumber = telephoneNumber;
 	}
 
-	public Pet getPets() {
+	public List<Pet> getPets() {
 		return pets;
 	}
 
-	public void setPets(Pet pets) {
+	public void setPets(List<Pet> pets) {
 		this.pets = pets;
 	}
 
@@ -56,7 +58,7 @@ public class Person {
 		this.telephoneNumber = telephoneNumber;
 	}
 
-	public Person(String idNumber, String name, String email, String telephoneNumber, Pet pets) {
+	public Person(String idNumber, String name, String email, String telephoneNumber, List<Pet> pets) {
 		super();
 		this.idNumber = idNumber;
 		this.name = name;
@@ -120,8 +122,8 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [idNumber=" + idNumber + ", name=" + name + ", email=" + email + ", telephoneNumber="
-				+ telephoneNumber + ", pets " + pets;
+		return "Név:" + name + "," + "tel:" + telephoneNumber + "  " + "emailcim : " + email + "\n"
+				+ "--------------------------Állatai------------------------------" + "\n" + pets;
 
 	}
 }

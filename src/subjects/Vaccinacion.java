@@ -43,8 +43,8 @@ public class Vaccinacion {
 
 	@Override
 	public String toString() {
-		return "vaccinationDate = " + vaccinationDate + ", vaccineValidity=" + vaccineValidity
-				+ ", groundsForVaccination=" + groundsForVaccination;
+		return "Oltás idõpontja :" + vaccinationDate + ", Oltás idõtartama : " + vaccineValidity
+				+ ", Oltás neve illetve tipusa :" + groundsForVaccination;
 	}
 
 }

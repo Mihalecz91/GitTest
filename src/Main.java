@@ -1,3 +1,4 @@
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -5,23 +6,26 @@ import exception.BadCharException;
 import repository.ButtonActions1;
 
 public class Main {
+	@SuppressWarnings("unused")
+	private static Scanner sc;
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 
 		final ButtonActions1 buttonActions1 = new ButtonActions1();
 		Scanner sc;
-
 		int statusMain = 0;
-
-		while (statusMain != 9) {
+		int statusSub1 = -1;
+		int statusSub2 = -1;
+		while (statusMain != 5) {
 			sc = new Scanner(System.in);
 			System.out.println("------------------Üdvözöljük!-------------------");
 			System.out.println("°°°°°°°°°°°°°°°°°°°°°Menü°°°°°°°°°°°°°°°°°°°°°°°°°");
 			System.out.println("A számok lenyomásával választhat az alábbi menûsor közül");
-			System.out.println("1-es gomb kisállat felvétele gazdi azonositó alapján!");
-			System.out.println("2-es gomb keresés Gazdi azonosito alapján");
+			System.out.println("1-es gomb Kisállat felvétele!");
+			System.out.println("2-es gomb Keresés");
 			System.out.println("3-as gomb Oltások listázása");
+			System.out.println("5-ös gomb KILÉPÉS");
 
 			try {
 				statusMain = sc.nextInt();
@@ -33,55 +37,105 @@ public class Main {
 
 				switch (statusMain) {
 				case 1:
-					while (statusMain != 0) {
-						System.out.println("1-es gomb uj állat felvétele új gazdával!");
-						System.out.println("2-es gomb uj állat felvétele meglévõ gazdával!");
+					System.out.println("-----------Kisállat felévtele------------");
+					System.out.println("1 -es gomb meglévõ gazdához!");
+					System.out.println("2- es gomb új gazdával!");
 
-						statusMain = sc.nextInt();
-						switch (statusMain) {
-						case 1:
-							buttonActions1.newPerson();
-							break;
-						case 2:
+					while (statusSub1 != 0) {
+						try {
+							sc = new Scanner(System.in);
+							statusSub1 = sc.nextInt();
+						} catch (InputMismatchException e) {
+							System.err.println("Nem jo karaktert adtál meg");
+						}
+						try {
+							switch (statusSub1) {
+
+							case 1:
+								buttonActions1.byPerson();
+								break;
+							case 2:
+								buttonActions1.peopleList();
+								break;
+
+							default:
+								throw new BadCharException();
+							}
+						} catch (BadCharException e) {
+							System.err.println(e.getMessage());
 							buttonActions1.newPets();
-							break;
+
 						}
 					}
-					continue;
-
 				case 2:
-					while (statusMain != 0) {
-						System.out.println("1es gomb Gazdi keresés személyigazolvány alapján!");
-						System.out.println("2-es gomb keresés név és email cim alapján");
-						System.out.println("3as gomb keresés chipszám alapján");
-						System.out.println("9es gomb kilépés");
-						statusMain = sc.nextInt();
-						switch (statusMain) {
-						case 1:
-							buttonActions1.searchByPeopleId();
-							break;
-						case 2:
-							buttonActions1.searcByEmail();
-							break;
-						case 3:
-							buttonActions1.searcByChipNumber();
-							break;
+					System.out.println("-----------Kisállat keresése------------");
+					System.out.println("1 -es gomb gazdi  email cime alapjan!");
+					System.out.println("2 -es gomb kisállat alapján!");
 
-						case 9:
-							System.out.println("A PROGRAM LEÁLLT!");
-							break;
-						default:
-							break;
+					while (statusSub1 != 0) {
+						try {
+							sc = new Scanner(System.in);
+							statusSub1 = sc.nextInt();
+						} catch (InputMismatchException e) {
+							System.err.println("Nem jo karaktert adtál meg");
+						}
+						try {
+							switch (statusSub1) {
+
+							case 1:
+								buttonActions1.searcByEmail();
+								break;
+							case 2:
+								buttonActions1.searcByChipNumber();
+								break;
+
+							default:
+								throw new BadCharException();
+							}
+						} catch (BadCharException e) {
+							System.err.println(e.getMessage());
+							buttonActions1.newPets();
 						}
 					}
+				case 3:
+					System.out.println("-----------Kisállat Oltásai------------");
+					System.out.println("1 -es gomb új oltás");
+					System.out.println("2 -es gomb eddigi oltások listázása!");
 
+					while (statusSub2 != 0) {
+						try {
+							sc = new Scanner(System.in);
+							statusSub2 = sc.nextInt();
+						} catch (InputMismatchException e) {
+							System.err.println("Nem jo karaktert adtál meg");
+						}
+						try {
+							switch (statusSub2) {
+
+							case 1:
+								buttonActions1.searcByChipNumber();
+								break;
+							case 2:
+								buttonActions1.searcByChipNumberPet();
+								break;
+
+							default:
+								throw new BadCharException();
+							}
+						} catch (BadCharException e) {
+							System.err.println(e.getMessage());
+
+						}
+
+					}
+				case 5:
 					break;
-
 				default:
 					throw new BadCharException();
 				}
 			} catch (BadCharException e) {
 				System.err.println(e.getMessage());
+
 			}
 			sc.close();
 		}
